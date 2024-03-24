@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appleProject.yourApple.mapper.YourAppleMapper">
+  <insert id="yourAppleWrite">
+  	insert into YourApple (yourAppleNo, title,price,content,id,divisionNo)
+values(yourApple_seq.nextval ,#{title} , #{price} , #{content} , #{id} , #{divisionNo} )
+  	</insert>
+  	<select id="lastYourAppleNo" resultType="Long">
+    select yourappleno 
+from (
+    select yourappleno 
+    from yourapple 
+    order by yourappleno desc
+)
+where rownum = 1
+</select>
+  	<insert id="fileUpload">
+  	insert into images(imageNo,yourAppleNo,imageAddress)
+values(images_seq.nextval , #{lastYourAppleNo} , #{imageAddress} )
+  	</insert>
+  	
+  	<select id="yourAppleList" resultType="YourAppleVO">
+  	select y.yourAppleNo , y.title,y.price,y.dates,y.divisionNo , i.imageAddress 
+from yourApple y join images i ON i.YourAppleNo = y.YourAppleNo
+  	</select>
+  	<select id="yourAppleView" resultType="YourAppleVO">
+  	select y.yourAppleNo , y.id , y.content , y.tel , y.title,y.price,y.dates,y.divisionNo , i.imageAddress 
+from yourApple y join images i ON i.YourAppleNo = y.YourAppleNo where y.yourAppleNo = #{yourAppleNo}
+  	</select>
+  	 <update id="uploadFileUpdate">
+  	 update images set imageAddress = #{imageAddress}  where yourAppleNo = #{yourAppleNo}
+  	 </update>
+  	 
+  	 <update id="yourAppleUpdate" >
+  	 	
+  	 update YourApple set title = #{title} , content= #{content} , price = #{price} , divisionNo = #{divisionNo} where yourAppleNo = #{yourAppleNo}
+  	 
+  	 </update>
+  	
+  	<delete id="yourAppleDelete">
+  	delete from yourApple where yourAppleNo = #{yourAppleNo}
+  	</delete>
+  	<delete id="yourAppleImageDelete">
+  	delete from images where yourAppleNo = #{yourAppleNo}
+  	</delete>
+  	
+
+</mapper>

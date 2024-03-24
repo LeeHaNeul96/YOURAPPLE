@@ -1,0 +1,25 @@
+
+    .mainBox{
+        background-color: white;
+        width: 100%;
+        border-radius: 3%;
+        text-align: left;
+    
+    }
+
+    .layOut{
+        margin:2% 2% 2% 2%;
+    }
+
+    .writeFormText{
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .fileUproad{
+        margin: 5% 5% 5% 2%;
+    }
+    .submitBtn{
+        text-align: right;
+        padding-bottom: 5%;
+    }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appleProject.appleBoard.mapper.AppleBoardMapper">
+<select id= "AppleBoardList" resultType="AppleBoardVO">
+	select appleBoardNo , title , content , id ,dates from AppleBoard order by appleBoardNo desc
+</select>
+
+<select id="AppleBoardView" resultType="AppleBoardVO">
+	select appleBoardNo , title , content , id , dates from AppleBoard where appleBoardNo = #{appleBoardNo}
+</select>
+
+<insert id="AppleBoardWrite"> 
+	insert into AppleBoard(appleBoardNo , title, content , id)
+	values(appleBoard_seq.nextval , #{title} , #{content} , #{id})
+</insert>
+
+<delete id="AppleBoardDelete">
+delete from appleBoard where appleBoardNo = #{appleBoardNo}
+</delete>
+
+<update id="AppleBoardUpdate">
+update AppleBoard set title = #{title} , content = #{content} where appleBoardNo = #{appleBoardNo} 
+</update>
+
+</mapper>
